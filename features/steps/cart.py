@@ -51,8 +51,8 @@ def step_impl(context):
 
 @then('an item is added to the cart')
 def step_impl(context):
-    product_added = context.browser.find_element_by_xpath("//h2[contains(.,'Product successfully "
-                                                          "added to your shopping cart')]")
+    product_added = context.browser.find_element_by_xpath("//h2[contains(.,'Product successfully added "
+                                                          "to your shopping cart')]")
     item_count = context.browser.find_element_by_xpath("//span[contains(.,'There is 1 item in your cart')]")
     assert product_added.is_displayed()
     assert item_count.is_displayed()
