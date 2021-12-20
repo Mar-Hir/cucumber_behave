@@ -1,9 +1,17 @@
+import os
+
 from behave import fixture, use_fixture
 from selenium import webdriver
 
+
 @fixture
 def selenium_browser_chrome(context):
-    driver = webdriver.Chrome(executable_path="C:\\Users\\Marta\\drivers\\chromedriver.exe")
+    chrome_path = os.environ.get("CHROME_EXE_PATH")
+    if chrome_path is None:
+        print("You need to set CHROME_EXE_PATH env variable. See the README for details.")
+    else:
+        print(chrome_path)
+    driver = webdriver.Chrome(executable_path=chrome_path)
     driver.maximize_window()
     driver.implicitly_wait(4)
     context.browser = driver
@@ -13,4 +21,3 @@ def selenium_browser_chrome(context):
 
 def before_all(context):
     use_fixture(selenium_browser_chrome, context)
-
