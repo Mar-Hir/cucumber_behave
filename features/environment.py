@@ -11,7 +11,10 @@ def selenium_browser_chrome(context):
         print("You need to set CHROME_EXE_PATH env variable. See the README for details.")
     else:
         print(chrome_path)
-    driver = webdriver.Chrome(executable_path=chrome_path)
+
+    options = webdriver.ChromeOptions()
+    options.add_experimental_option('excludeSwitches', ['enable-logging'])
+    driver = webdriver.Chrome(executable_path=chrome_path, options=options)
     driver.maximize_window()
     driver.implicitly_wait(4)
     context.browser = driver
